@@ -1,16 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route } from 'react-router-dom'
 
-function App() {
-  const [count, setCount] = useState(0)
+import CoffeePage from './pages/CoffeePage.jsx'
+import GamePage from './pages/GamePage.jsx'
+import NotFoundPage from './pages/NotFoundPage.jsx'
+import StartPage from './pages/StartPage.jsx'
+import ScoresPage from './pages/ScoresPage.jsx'
 
+import NavBar from './components/NavBar.jsx'
+
+// import './App.css'
+
+export default function App() {
   return (
-    <>
-      <h1>Step Up... It's Time to Tick, Tock, Toe!</h1>
-    </>
-  )
-}
+    <main>
+      <NavBar />
+            <Routes>
+                <Route path="/game" element={<GamePage />} />
+                <Route path="/chats" element={<ChatsPage />} />
+                <Route path="/scores" element={<ScoresPage />} />
+                <Route path="/" element={<StartPage />} />
 
-export default App
+                <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+    </main>
+  );
+}
