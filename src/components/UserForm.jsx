@@ -6,7 +6,7 @@ export default function UserForm() {
   function handleSubmit(event) {
     event.preventDefault();
     localStorage.setItem("username", username);
-    alert(`Hello, ${username}!`);
+    alert(`Hello, ${username}! Refresh the browser to see updated username.`);
   }
 
   return (

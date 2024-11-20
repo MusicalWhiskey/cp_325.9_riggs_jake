@@ -16,12 +16,13 @@ import NavBar from './components/NavBar.jsx'
 export default function App() {
   return (
     <main>
+      <p>Welcome {localStorage.getItem("username")}</p>
       <NavBar />
             <Routes>
                 <Route path="/" element={<UserPage />} />
                 <Route path="/game" element={<GamePage />} />
-                <Route path="/coffee" element={<CoffeePage />} />
                 <Route path="/scores" element={<ScoresPage />} />
+                <Route path="/coffee" element={<CoffeePage />} />
 
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
