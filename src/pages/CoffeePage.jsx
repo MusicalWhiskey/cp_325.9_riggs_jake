@@ -1,5 +1,4 @@
 import { Routes } from "react-router-dom"
-import NavBar from "../components/NavBar.jsx"
 
 export default function CoffeePage() {
     return (

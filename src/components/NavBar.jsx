@@ -4,9 +4,9 @@ export default function NavBar() {
   return (
     <nav>
       <Link to="/game">Game</Link>
-      <Link to="/chats">Chats</Link>
+      <Link to="/coffee">Coffee</Link>
       <Link to="/scores">Scores</Link>
-      <Link to="/">Start Page</Link>
+      <Link to="/">Start</Link>
     </nav>
   );
 }
