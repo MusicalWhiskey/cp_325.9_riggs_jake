@@ -1,20 +1,22 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 
 export default function Scores() {
-    const [allScores, setAllScores] = React.useState([]);
+    const [allScores, setAllScores] = useState([]);
 
     const fetchScores = async () => 
         {
             try {
-                const response = await fetch('http://localhost:4000/scores');
-                const scores = await response.json();
-                setAllScores(scores);
+                const response = await axios.get("http://localhost:3000/scores");
+                setAllScores(response.data);
             } catch (error) {
-                console.log(error);
+                console.error(error);
             }
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetchScores();
     }, []);
 
@@ -24,9 +26,10 @@ export default function Scores() {
             <h1>High Scores</h1>
             <div>
                 {allScores.map((score) => (
-                    <div>
+                    <div key={score._id}>
                         <p>{score.username}</p>
                         <p>{score.score}</p>
+                        <p>{score.date}</p>
                     </div>
                 ))}
             </div>
