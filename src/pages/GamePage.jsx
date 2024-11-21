@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
-import Game from "../components/Game";
-
+import Game from '../components/Game.jsx';
 export default function GamePage() {
     const username = localStorage.getItem("username");
     return (

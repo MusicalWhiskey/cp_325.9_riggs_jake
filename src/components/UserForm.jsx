@@ -23,7 +23,7 @@ export default function LoginForm() {
         </label>
         <button type="submit">Login</button>
       </form>
-      {displayName && <p>Welcome, {displayName}!</p>}
+      {displayName && <div><p>Welcome, {displayName}!</p><br /><a href="/game">Ready to Play</a></div>}
     </div>
   );
 }
