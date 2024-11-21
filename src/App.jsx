@@ -8,10 +8,9 @@ import NotFoundPage from './pages/NotFoundPage.jsx'
 import UserPage from './pages/UserPage.jsx'
 import ScoresPage from './pages/ScoresPage.jsx'
 
-import UserForm from './components/UserForm.jsx'
 import NavBar from './components/NavBar.jsx'
 
-// import './App.css'
+import './App.css'
 
 export default function App() {
   return (

@@ -1,0 +1,15 @@
+.board-row {
+    display: flex; /* make the container a flex container */
+    justify-content: auto; /* justify the content to take up the full width */
+  }
+
+.square {
+    width: 100px; /* set a fixed width */
+    height: 100px; /* set a fixed height */
+    padding: 10px; /* add some padding to make the button larger */
+    border: 5px solid red; /* remove the default border */
+    background-color: black; /* add a background color */
+    font-size: 24px; /* increase the font size */
+    text-align: center; /* center the text */
+    cursor: pointer; /* add a pointer cursor */
+  }
