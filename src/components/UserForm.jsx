@@ -1,25 +1,30 @@
 import React, { useState } from "react";
 
-export default function UserForm() {
+export default function LoginForm() {
   const [username, setUsername] = useState("");
+  const [displayName, setDisplayName] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
     localStorage.setItem("username", username);
-    alert(`Hello, ${username}! Refresh the browser to see updated username.`);
+    setDisplayName(username);
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input
-          type="text"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Username:
+          <input
+            type="text"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+          />
+        </label>
+        <button type="submit">Login</button>
+      </form>
+      {displayName && <p>Welcome, {displayName}!</p>}
+    </div>
   );
 }
+

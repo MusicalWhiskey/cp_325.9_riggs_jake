@@ -16,7 +16,6 @@ import NavBar from './components/NavBar.jsx'
 export default function App() {
   return (
     <main>
-      <p>Welcome {localStorage.getItem("username")}</p>
       <NavBar />
             <Routes>
                 <Route path="/" element={<UserPage />} />
