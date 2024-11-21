@@ -9,7 +9,7 @@ export default function Scores() {
     const fetchScores = async () => 
         {
             try {
-                const response = await axios.get("http://localhost:3000/scores");
+                const response = await axios.get("http://localhost:4000/api/scores");
                 setAllScores(response.data);
             } catch (error) {
                 console.error(error);
