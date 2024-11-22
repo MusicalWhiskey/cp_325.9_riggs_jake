@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-
+import { useState, useEffect } from 'react';
+import '../styles/TickTockToe.css';
 const initialBoard = Array(9).fill(null);
 
 const calculateWinner = (board) => {
@@ -81,37 +81,32 @@ const TicTacToe = () => {
             }
             setTimeout(() => {
                 setBoard(initialBoard);
-                setStatus('Your move!');
+                setStatus('Your Move!');
                 setIsPlayerTurn(true);
             }, 100);
         } else if (!board.includes(null)) {
             setStatus('Draw!');
             setTimeout(() => {
                 setBoard(initialBoard);
-                setStatus('Your move!');
+                setStatus('Your Move!');
                 setIsPlayerTurn(true);
             }, 100);
         }
     }, [board]);
 
     return (
-        <div>
+        <div className="board-container">
             <div>
-                <strong>Time Left: {timer} seconds</strong>
+                <p className='timer'>Time Left: {timer} seconds</p><span className='score'>Score: {score}</span>
             </div>
-            <div>
-                <strong>Score: {score}</strong>
+            <div className="status">
+            {status}
             </div>
-            <div>
-                {status}
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 100px)', gap: '10px' }}>
+            <div className="board">
                 {board.map((value, index) => (
-                    <button
+                    <button className="square"
                         key={index}
-                        onClick={() => handleClick(index)}
-                        style={{ width: '100px', height: '100px', fontSize: '24px' }}
-                    >
+                        onClick={() => handleClick(index)}>
                         {value}
                     </button>
                 ))}

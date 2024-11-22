@@ -1,15 +1,49 @@
-.board-row {
-    display: flex; /* make the container a flex container */
-    justify-content: auto; /* justify the content to take up the full width */
-  }
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  align-items: center;
+  align-content: center;
+  margin: auto;
+  width: 300px;
+  height: 300px;
+  margin-top: 20px;
+}
+
+.board-container {
+  flex-wrap: flex;
+  width: 300px;
+  height: 300px;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+}
 
 .square {
-    width: 100px; /* set a fixed width */
-    height: 100px; /* set a fixed height */
-    padding: 10px; /* add some padding to make the button larger */
-    border: 5px solid red; /* remove the default border */
-    background-color: black; /* add a background color */
-    font-size: 24px; /* increase the font size */
-    text-align: center; /* center the text */
-    cursor: pointer; /* add a pointer cursor */
-  }
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.timer {
+  justify-content: left;
+  font-size: 18px;
+}
+
+.status {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.score {
+  justify-content: right;
+  font-size: 18px;
+}
