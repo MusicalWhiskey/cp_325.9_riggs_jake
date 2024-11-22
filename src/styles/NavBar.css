@@ -3,23 +3,23 @@
     justify-content: center;
     gap: 10px;
     align-items: center;
-    background-color: rgba(34, 139, 34, 0.273);
-    color: black;
+    outline: 1px solid darkcyan;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
   }
   
   .navbar a {
-    color: black;
+    color: darkcyan;
     text-decoration: none;
-    padding: 5px 20px;
+    padding: 10px 20px;
     border-radius: 10px;
     transition: background-color .5s ease;
   }
   
   .navbar a:hover {
-    background-color: black;
-    color: forestgreen;
+    background-color: darkcyan;
+    color: black;
   }     

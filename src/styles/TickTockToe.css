@@ -11,21 +11,16 @@
 
 .board-container {
   
-  flex-wrap: flex;
   width: 370px;
   height: 370px;
-  margin: auto;
 }
 
-.row {
-  display: flex;
-}
 
 
 .square {
   width: 120px;
   height: 120px;
-  border: 1px solid darkgray;
+  border: 1px solid darkcyan;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,18 +28,28 @@
   cursor: pointer;
   background-color: black;
   border-radius: 6px;
-  color: forestgreen
+  color: darkcyan
 }
 
 .square:hover {
-  transition:all 0.2s ease;
+  transition: transform 0.2s ease-in-out;
   transform: scale(1.08);
-  background-color: darkgray;
+  transition:background-color 0.4s ease-in-out;
+  background-color: rgba(0, 139, 139, 0.237);
 }
+
+.square.x {
+  color: rgb(255, 255, 255);
+}
+
+.square.o {
+  color: darkcyan;
+}
+
 
 .timer {
 text-align: left;  
-font-size: 18px;
+font-size: 24px;
 }
 
 .status {
@@ -55,5 +60,15 @@ font-size: 18px;
 
 .score {
   text-align: right;
-  font-size: 18px;
+  font-size: 24px;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+body {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

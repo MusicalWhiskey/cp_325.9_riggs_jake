@@ -111,11 +111,8 @@ const TicTacToe = () => {
 
     return (
         <div className="board-container">
-            <div>
+            <div className="game-info">
                 <span className='timer'>{timer} Seconds Remaining</span><span className='score'>Score: {score}</span>
-            </div>
-            <div className="status">
-            {status}
             </div>
             <div className="board">
                 {board.map((value, index) => (
@@ -125,6 +122,9 @@ const TicTacToe = () => {
                         {value}
                     </button>
                 ))}
+            </div>
+            <div className="status">
+            {status}
             </div>
         </div>
     );

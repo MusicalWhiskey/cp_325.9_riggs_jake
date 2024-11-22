@@ -7,7 +7,7 @@ export default function NavBar() {
       <Link to="/">Start</Link>
       <Link to="/game">Game</Link>
       <Link to="/scores">Scores</Link>
-      <Link to="/coffee">Coffee</Link>
+      <Link to="/support">Support</Link>
     </nav>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import '../styles/UserForm.css';
+import { Link } from "react-router-dom";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
@@ -19,12 +20,15 @@ export default function LoginForm() {
           <input
             type="text"
             value={username}
+            placeholder="Ex: TicTacChamp"
             onChange={(event) => setUsername(event.target.value)}
           />
         </label>
-        <button type="submit">Login</button>
+        <button type="submit">Set Name</button>
       </form>
-      {displayName && <div><p>Welcome, {displayName}!</p><br /><a href="/game">Ready to Play</a></div>}
+      {displayName && <div className="welcome-message">Welcome, {displayName}!
+      <Link to="/game"><button className="play-button">Click Here to Play</button>
+      </Link></div>}
     </div>
   );
 }
