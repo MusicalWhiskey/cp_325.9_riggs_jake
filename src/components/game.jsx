@@ -25,6 +25,9 @@ export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
   const [isComputerTurn, setIsComputerTurn] = useState(false);
+  const [playerWins, setPlayerWins] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(60); // 1 minute timer
 
   const xIsNext = currentMove % 2 === 0;
 
@@ -67,19 +70,55 @@ export default function Game() {
     if (isComputerTurn && !calculateWinner(currentSquares)) {
       const timeoutId = setTimeout(() => {
         computerPlay();
-      }, 100); // Pause for 500ms (0.5s) before computer plays
+      }, 500); // Pause for 500ms (0.5s) before computer plays
       return () => clearTimeout(timeoutId);
     }
   }, [isComputerTurn, currentSquares]);
 
   const winner = calculateWinner(currentSquares);
+  if (winner === 'X' && !history[currentMove].includes(null)) {
+    setPlayerWins(playerWins + 1); // Increment player wins when player wins and game is not still in progress
+    setGameOver(true); // Set game over to true
+  }
+
+  useEffect(() => {
+    if (gameOver) {
+      const timeoutId = setTimeout(() => {
+        setHistory([Array(9).fill(null)]); // Reset game board
+        setCurrentMove(0); // Reset current move
+        setIsComputerTurn(false); // Reset computer turn
+        setGameOver(false); // Reset game over
+      }, 2000); // Reset game board after 2 seconds
+      return () => clearTimeout(timeoutId);
+    }
+  }, [gameOver]);
+
+  useEffect(() => {
+    if (!winner && !currentSquares.includes(null)) {
+      setGameOver(true); // Set game over to true
+    }
+  }, [currentSquares, winner]);
+
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const timeoutId = setTimeout(() => {
+        setTimeLeft(timeLeft - 1);
+      }, 1000); // Decrease time left by 1 second every second
+      return () => clearTimeout(timeoutId);
+    } else {
+      setGameOver(true); // Set game over to true when time runs out
+    }
+  }, [timeLeft]);
+
   let status;
   if (winner) {
     status = 'Winner: ' + winner;
+  } else if (!currentSquares.includes(null)) {
+    status = 'It\'s a tie!';
   } else {
     status = 'Next player: ' + (xIsNext ? 'X' : 'O');
   }
-
+  
   return (
     <div className="game">
       <div className="game-board">
@@ -107,6 +146,8 @@ export default function Game() {
       </div>
       <div className="game-info">
         <div>{status}</div>
+        <div>Player Wins: {playerWins}</div>
+        <div>Time Left: {timeLeft}</div>
       </div>
     </div>
   );
