@@ -23,7 +23,9 @@ export default function App() {
                 <Route path="/coffee" element={<CoffeePage />} />
 
                 <Route path="*" element={<NotFoundPage />} />
+                
             </Routes>
+
     </main>
   );
 }

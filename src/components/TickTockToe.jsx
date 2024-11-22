@@ -97,7 +97,7 @@ const TicTacToe = () => {
     return (
         <div className="board-container">
             <div>
-                <p className='timer'>Time Left: {timer} seconds</p><span className='score'>Score: {score}</span>
+                <p className='timer'>{timer} Seconds Remaining</p><span className='score'>Score: {score}</span>
             </div>
             <div className="status">
             {status}

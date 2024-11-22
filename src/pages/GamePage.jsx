@@ -5,7 +5,6 @@ export default function GamePage() {
     const username = localStorage.getItem("username");
     return (
         <>
-            <p>Time to Tick Tock Toe, {username}!</p>
             <TickTockToe />
 
         </>
