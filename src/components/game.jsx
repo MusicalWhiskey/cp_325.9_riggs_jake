@@ -1,101 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/Game.css';
-// eslint-disable-next-line react/prop-types
-function Square({ value, onSquareClick }) {
-  return (
-    <button className="square" onClick={onSquareClick}>
-      {value}
-    </button>
-  );
-}
-
-// eslint-disable-next-line react/prop-types
-function Board({ xIsNext, squares, onPlay }) {
-  function handleClick(i) {
-    if (calculateWinner(squares) || squares[i]) {
-      return;
-    }
-    // eslint-disable-next-line react/prop-types
-    const nextSquares = squares.slice();
-    if (xIsNext) {
-      nextSquares[i] = 'X';
-    } else {
-      nextSquares[i] = 'O';
-    }
-    onPlay(nextSquares);
-  }
-
-  const winner = calculateWinner(squares);
-  let status;
-  if (winner) {
-    status = 'Winner: ' + winner;
-  } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
-  }
-
-  return (
-    <>
-      <div className="status">{status}</div>
-      <div className="board-row">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-      </div>
-    </>
-  );
-}
-
-export default function Game() {
-  const [history, setHistory] = useState([Array(9).fill(null)]);
-  const [currentMove, setCurrentMove] = useState(0);
-  const xIsNext = currentMove % 2 === 0;
-  const currentSquares = history[currentMove];
-
-  function handlePlay(nextSquares) {
-    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
-    setHistory(nextHistory);
-    setCurrentMove(nextHistory.length - 1);
-  }
-
-  function jumpTo(nextMove) {
-    setCurrentMove(nextMove);
-  }
-
-  const moves = history.map((squares, move) => {
-    let description;
-    if (move > 0) {
-      description = 'Go to move #' + move;
-    } else {
-      description = 'Go to game start';
-    }
-    return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
-      </li>
-    );
-  });
-
-  return (
-    <div className="game">
-      <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-      </div>
-      <div className="game-info">
-        <ol>{moves}</ol>
-      </div>
-    </div>
-  );
-}
 
 function calculateWinner(squares) {
   const lines = [
@@ -115,4 +19,95 @@ function calculateWinner(squares) {
     }
   }
   return null;
+}
+
+export default function Game() {
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [currentMove, setCurrentMove] = useState(0);
+  const [isComputerTurn, setIsComputerTurn] = useState(false);
+
+  const xIsNext = currentMove % 2 === 0;
+
+  const currentSquares = history[currentMove];
+
+  function handlePlay(nextSquares) {
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
+    setIsComputerTurn(true); // Set computer turn to true after user's turn
+  }
+
+  function computerPlay() {
+    const emptySquares = currentSquares.map((square, index) => [square, index]).filter(([square]) => !square);
+    const randomIndex = Math.floor(Math.random() * emptySquares.length);
+    const [square, index] = emptySquares[randomIndex];
+    const nextSquares = currentSquares.slice();
+    nextSquares[index] = 'O'; // Computer plays as 'O'
+    handlePlay(nextSquares);
+    setIsComputerTurn(false); // Set computer turn to false after computer's turn
+  }
+
+  function handleClick(i) {
+    if (calculateWinner(currentSquares) || currentSquares[i]) {
+      return;
+    }
+    if (isComputerTurn) {
+      return; // Prevent user from clicking during computer's turn
+    }
+    const nextSquares = currentSquares.slice();
+    if (xIsNext) {
+      nextSquares[i] = 'X';
+    } else {
+      nextSquares[i] = 'O';
+    }
+    handlePlay(nextSquares);
+  }
+
+  useEffect(() => {
+    if (isComputerTurn && !calculateWinner(currentSquares)) {
+      const timeoutId = setTimeout(() => {
+        computerPlay();
+      }, 100); // Pause for 500ms (0.5s) before computer plays
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isComputerTurn, currentSquares]);
+
+  const winner = calculateWinner(currentSquares);
+  let status;
+  if (winner) {
+    status = 'Winner: ' + winner;
+  } else {
+    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+  }
+
+  return (
+    <div className="game">
+      <div className="game-board">
+        <div className="board-row">
+          {currentSquares.slice(0, 3).map((square, i) => (
+            <button key={i} className="square" onClick={() => handleClick(i)}>
+              {square}
+            </button>
+          ))}
+        </div>
+        <div className="board-row">
+          {currentSquares.slice(3, 6).map((square, i) => (
+            <button key={i + 3} className="square" onClick={() => handleClick(i + 3)}>
+              {square}
+            </button>
+          ))}
+        </div>
+        <div className="board-row">
+          {currentSquares.slice(6, 9).map((square, i) => (
+            <button key={i + 6} className="square" onClick={() => handleClick(i + 6)}>
+              {square}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="game-info">
+        <div>{status}</div>
+      </div>
+    </div>
+  );
 }
