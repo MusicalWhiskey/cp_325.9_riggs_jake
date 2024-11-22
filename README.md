@@ -1,8 +1,8 @@
-# React + Vite
+Welcome to Tick Tock Toe. This is a speed tick tack toe game where the user finishes as many tick tack toes as they can before the timer runs out. You can set your username and keep track of your high scores. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Github Links:
+Frontend:
+https://github.com/MusicalWhiskey/cp_325_frontend_riggs_jake
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Backend:
+https://github.com/MusicalWhiskey/cp_325_backend_riggs_jake

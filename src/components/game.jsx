@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../styles/Game.css';
+// eslint-disable-next-line react/prop-types
 function Square({ value, onSquareClick }) {
   return (
     <button className="square" onClick={onSquareClick}>
@@ -8,11 +9,13 @@ function Square({ value, onSquareClick }) {
   );
 }
 
+// eslint-disable-next-line react/prop-types
 function Board({ xIsNext, squares, onPlay }) {
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
+    // eslint-disable-next-line react/prop-types
     const nextSquares = squares.slice();
     if (xIsNext) {
       nextSquares[i] = 'X';
