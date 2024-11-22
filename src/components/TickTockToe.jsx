@@ -70,6 +70,21 @@ const TicTacToe = () => {
         newBoard[index] = 'X';
         setBoard(newBoard);
         setIsPlayerTurn(false);
+
+        const Square = ({ value, onSquareClick }) => {
+            let className = 'square';
+            if (value === 'X') {
+              className += ' x';
+            } else if (value === 'O') {
+              className += ' o';
+            }
+          
+            return (
+              <button className={className} onClick={onSquareClick}>
+                {value}
+              </button>
+            );
+          };
     };
 
     useEffect(() => {
@@ -97,7 +112,7 @@ const TicTacToe = () => {
     return (
         <div className="board-container">
             <div>
-                <p className='timer'>{timer} Seconds Remaining</p><span className='score'>Score: {score}</span>
+                <span className='timer'>{timer} Seconds Remaining</span><span className='score'>Score: {score}</span>
             </div>
             <div className="status">
             {status}
