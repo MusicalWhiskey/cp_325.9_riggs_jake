@@ -1,4 +1,5 @@
 import { Routes } from "react-router-dom"
+import "../styles/Pages.css"
 
 export default function CoffeePage() {
     return (

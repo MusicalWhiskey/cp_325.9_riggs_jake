@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../styles/UserForm.css';
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
@@ -12,8 +13,8 @@ export default function LoginForm() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <label className="login-label">
           Username:
           <input
             type="text"
