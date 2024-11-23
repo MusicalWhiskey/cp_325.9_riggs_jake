@@ -29,13 +29,13 @@
   background-color: black;
   border-radius: 6px;
   color: darkcyan;
-  filter: drop-shadow(6px 10px 10px darkcyan);
+  filter: drop-shadow(0px 10px 10px darkcyan);
 }
 
 .square:hover {
   
   transform: scale(.95);
-    filter: drop-shadow(4px 4px 5px darkcyan);
+    filter: drop-shadow(0px 0px 5px darkcyan);
     transition: all 0.2s ease;
 }
 
