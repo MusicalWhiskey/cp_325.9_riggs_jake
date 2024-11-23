@@ -4,7 +4,7 @@ import "../styles/Pages.css"
 export default function DonatePage() {
     return (
         <>
-            <h1>Support MusicalCoffee by buying me a cup of coffee!</h1>
+            <h2>If you enjoy this game, please consider donating!</h2>
 
         </>
     )

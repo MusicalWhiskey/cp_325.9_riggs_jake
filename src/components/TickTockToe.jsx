@@ -29,8 +29,8 @@ const TickTockToe = () => {
     const username = localStorage.getItem("username");
     const [board, setBoard] = useState(initialBoard);
     const [isPlayerTurn, setIsPlayerTurn] = useState(true);
-    const [status, setStatus] = useState(`${username}, make your move!`);
-    const [timer, setTimer] = useState(10);
+    const [status, setStatus] = useState(`${username}, quickly make your move!`);
+    const [timer, setTimer] = useState(60);
     const [score, setScore] = useState(0);
     const intervalRef = useRef(null);
     const requestSentRef = useRef(false);
@@ -49,7 +49,8 @@ const TickTockToe = () => {
                         sendScore();
                         requestSentRef.current = true;
                     }
-                    setStatus(`Time's up, ${username}! You've scored ${score} points.`);
+                    setStatus(`Time's up, ${username}... \n You've scored ${score} points!
+                         `);
                     return prev;
                 }
                 return prev - 1;
@@ -136,9 +137,19 @@ const TickTockToe = () => {
                     </button>
                 ))}
             </div>
-            <div className="status">
+            <div className="status" style={{ whiteSpace: 'pre-wrap' }}>
             {status}
             </div>
+            <button className="reset-clock" onClick={() => {
+                setBoard(initialBoard);
+                setStatus(`${username}, quickly make your move!`);
+                setIsPlayerTurn(true);
+                setTimer(10);
+                setScore(0);
+                requestSentRef.current = false;
+            }}>
+                10 Second Game
+            </button>
         </div>
     );
 };

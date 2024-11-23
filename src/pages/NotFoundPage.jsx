@@ -7,7 +7,7 @@ export default function NotFoundPage() {
     <main>
       <h1>Page Not Found</h1>
 
-      <Link to='/'>Start Page</Link>
+      <button className="link-button" to='/'>Start Page</button>
     </main>
   );
 }
