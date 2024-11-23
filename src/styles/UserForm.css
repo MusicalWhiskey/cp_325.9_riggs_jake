@@ -33,49 +33,55 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color .5s ease; 
     text-align: center; 
+    filter: drop-shadow(6px 10px 10px darkcyan);
 }
 
 .login-form button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: darkcyan;
-    color: black;
+    background-color: black;
+    color: darkcyan;
     font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-weight: bold;
     margin-top: 30px;
+    border: 1px solid darkcyan;
+    filter: drop-shadow(6px 10px 10px darkcyan);
+
 }
 
 .login-form button:hover {
-    background-color: black;
-    outline: 2px solid darkcyan;
-    color: darkcyan;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color .5s ease;
+    transform: scale(.95);
+    filter: drop-shadow(4px 4px 5px darkcyan);
+    transition: all 0.2s ease;
+
+
 }
 
 
 .play-button {
+    margin-top: 20px;
     padding: 10px 20px;
-    border: none;
+    border: 1px solid darkcyan;
     border-radius: 5px;
     background-color: darkcyan;
     color: black;
     font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: black;
+    border-radius: 6px;
+    color: darkcyan;
+    filter: drop-shadow(6px 10px 10px darkcyan);
     font-weight: bold;
-    margin-top: 30px;
+
 }
 
 .play-button:hover {
-    background-color: black;
-    outline: 2px solid darkcyan;
-    color: darkcyan;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color .5s ease;
+    transform: scale(.95);
+    filter: drop-shadow(4px 4px 5px darkcyan);
+    transition: all 0.2s ease;
+
 }
 
 

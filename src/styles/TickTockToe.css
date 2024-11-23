@@ -28,22 +28,15 @@
   cursor: pointer;
   background-color: black;
   border-radius: 6px;
-  color: darkcyan
+  color: darkcyan;
+  filter: drop-shadow(6px 10px 10px darkcyan);
 }
 
 .square:hover {
-  transition: transform 0.2s ease-in-out;
-  transform: scale(1.08);
-  transition:background-color 0.4s ease-in-out;
-  background-color: rgba(0, 139, 139, 0.237);
-}
-
-.square.x {
-  color: rgb(255, 255, 255);
-}
-
-.square.o {
-  color: darkcyan;
+  
+  transform: scale(.95);
+    filter: drop-shadow(4px 4px 5px darkcyan);
+    transition: all 0.2s ease;
 }
 
 
