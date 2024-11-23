@@ -15,7 +15,7 @@ import DonatePage from './pages/DonatePage.jsx'
 
 export default function App() {
   return (
-    <main>
+    <main className="app-container">
       <NavBar />
             <Routes>
                 <Route path="/" element={<UserPage />} />

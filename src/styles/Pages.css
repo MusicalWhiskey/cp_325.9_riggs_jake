@@ -4,5 +4,7 @@ main {
     align-items: center;
     color: darkcyan;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 450px;
+    height: 750px;  
 
 }

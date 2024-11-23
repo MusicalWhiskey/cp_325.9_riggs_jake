@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import '../styles/TickTockToe.css';
+import axios from 'axios';
+
 const initialBoard = Array(9).fill(null);
 
 const calculateWinner = (board) => {
@@ -23,19 +25,30 @@ const calculateWinner = (board) => {
     return null;
 };
 
-const TicTacToe = () => {
+const TickTockToe = () => {
+    const username = localStorage.getItem("username");
     const [board, setBoard] = useState(initialBoard);
     const [isPlayerTurn, setIsPlayerTurn] = useState(true);
-    const [status, setStatus] = useState('Your move!');
-    const [timer, setTimer] = useState(60);
+    const [status, setStatus] = useState(`${username}, make your move!`);
+    const [timer, setTimer] = useState(10);
     const [score, setScore] = useState(0);
+    const intervalRef = useRef(null);
+    const requestSentRef = useRef(false);
 
     useEffect(() => {
-        const username = localStorage.getItem("username");
-        let interval = setInterval(() => {
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+        }
+
+        intervalRef.current = setInterval(() => {
             setTimer((prev) => {
                 if (prev === 0) {
-                    clearInterval(interval);
+                    clearInterval(intervalRef.current);
+                    intervalRef.current = null;
+                    if (!requestSentRef.current) {
+                        sendScore();
+                        requestSentRef.current = true;
+                    }
                     setStatus(`Time's up, ${username}! You've scored ${score} points.`);
                     return prev;
                 }
@@ -43,11 +56,25 @@ const TicTacToe = () => {
             });
         }, 1000);
 
-        return () => clearInterval(interval);
+        return () => clearInterval(intervalRef.current);
     }, [score]);
+
+    const sendScore = () => {
+        axios.post('http://localhost:4000/api/scores', {
+            username: username,
+            score: score
+        })
+        .then(response => {
+            console.log('Score submitted successfully:', response.data);
+        })
+        .catch(error => {
+            console.error('There was an error submitting the score:', error);
+        });
+    };
 
     useEffect(() => {
         if (!isPlayerTurn && !calculateWinner(board)) {
+            setStatus('Computer is thinking...');
             const emptySquares = board.map((value, index) => value === null ? index : null).filter(val => val !== null);
             const randomMove = emptySquares[Math.floor(Math.random() * emptySquares.length)];
             if (randomMove !== undefined) {
@@ -56,6 +83,7 @@ const TicTacToe = () => {
                     newBoard[randomMove] = 'O';
                     setBoard(newBoard);
                     setIsPlayerTurn(true);
+                    setStatus(`Your move, ${username}!`);
                 }, 100);
             }
         }
@@ -70,21 +98,6 @@ const TicTacToe = () => {
         newBoard[index] = 'X';
         setBoard(newBoard);
         setIsPlayerTurn(false);
-
-        const Square = ({ value, onSquareClick }) => {
-            let className = 'square';
-            if (value === 'X') {
-              className += ' x';
-            } else if (value === 'O') {
-              className += ' o';
-            }
-          
-            return (
-              <button className={className} onClick={onSquareClick}>
-                {value}
-              </button>
-            );
-          };
     };
 
     useEffect(() => {
@@ -130,4 +143,4 @@ const TicTacToe = () => {
     );
 };
 
-export default TicTacToe;
+export default TickTockToe;

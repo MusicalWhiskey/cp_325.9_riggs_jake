@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import '../styles/Scores.css'
 
 
 export default function Scores() {
@@ -9,7 +10,9 @@ export default function Scores() {
     const fetchScores = async () => 
         {
             try {
-                const response = await axios.get("http://localhost:4000/api/scores");
+                const response = await axios.get("http://localhost:4000/scores");
+                const sortedScores = response.data.sort((a, b) => b.score - a.score);
+                setAllScores(sortedScores);
                 setAllScores(response.data);
             } catch (error) {
                 console.error(error);
@@ -23,13 +26,13 @@ export default function Scores() {
 
     return (
         <main>
-            <h1>High Scores</h1>
+            <h1 className="scores-title">High Scores</h1>
             <div>
                 {allScores.map((score) => (
-                    <div key={score._id}>
-                        <p>{score.username}</p>
-                        <p>{score.score}</p>
-                        <p>{score.date}</p>
+                    <div className="full-score" key={score._id}>
+                        <p className="username">{score.username}</p>
+                        <p className="score">Score:<span className="score-number">{score.score}</span></p>
+                        <p className="date">{score.date}</p>
                     </div>
                 ))}
             </div>
