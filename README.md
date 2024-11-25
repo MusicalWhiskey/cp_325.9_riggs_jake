@@ -10,6 +10,7 @@ Future Soundtrack coming that will be composed in Tone.js
 - Will have local/non-local highscore divisions
 - More sound/visual feedback once player wins or loses a game
 - More visual skins
+- More computer turn difficulty settings
 
 
 Github Links:
