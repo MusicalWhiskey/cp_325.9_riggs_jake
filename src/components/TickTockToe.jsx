@@ -2,8 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 import '../styles/TickTockToe.css';
 import axios from 'axios';
 
+
+//Makes the game board
 const initialBoard = Array(9).fill(null);
 
+//Winning combinations and finds the winner
 const calculateWinner = (board) => {
     const lines = [
         [0, 1, 2],
@@ -26,27 +29,29 @@ const calculateWinner = (board) => {
 };
 
 const TickTockToe = () => {
-    const username = localStorage.getItem("username");
-    const [board, setBoard] = useState(initialBoard);
-    const [isPlayerTurn, setIsPlayerTurn] = useState(true);
-    const [status, setStatus] = useState(`${username}, quickly make your move!`);
-    const [timer, setTimer] = useState(60);
-    const [score, setScore] = useState(0);
-    const intervalRef = useRef(null);
-    const requestSentRef = useRef(false);
+    const username = localStorage.getItem("username"); //Retrieves username
+    const [board, setBoard] = useState(initialBoard); //Game board setter
+    const [isPlayerTurn, setIsPlayerTurn] = useState(true); //Turn tracker
+    const [status, setStatus] = useState(`${username}, quickly make your move!`); //Status message
+    const [timer, setTimer] = useState(60); //Game timer limit
+    const [score, setScore] = useState(0); //Player score
+    const intervalRef = useRef(null); //Game timer handler/setter
+    const requestSentRef = useRef(false); //Score submission tracker
 
+
+    //Game timer handler
     useEffect(() => {
         if (intervalRef.current) {
-            clearInterval(intervalRef.current);
+            clearInterval(intervalRef.current);//Clears interval
         }
 
         intervalRef.current = setInterval(() => {
             setTimer((prev) => {
                 if (prev === 0) {
                     clearInterval(intervalRef.current);
-                    intervalRef.current = null;
+                    intervalRef.current = null;//Clears interval if timer runs out
                     if (!requestSentRef.current) {
-                        sendScore();
+                        sendScore(); //Sends score
                         requestSentRef.current = true;
                     }
                     setStatus(`Time's up, ${username}... \n You've scored ${score} points!
@@ -55,31 +60,37 @@ const TickTockToe = () => {
                 }
                 return prev - 1;
             });
-        }, 1000);
+        }, 1000); //Runs every 1 second
 
         return () => clearInterval(intervalRef.current);
     }, [score]);
 
+
     const sendScore = () => {
-        axios.post('http://localhost:4000/api/scores', {
-            username: username,
-            score: score
-        })
-        .then(response => {
-            console.log('Score submitted successfully:', response.data);
-        })
-        .catch(error => {
-            console.error('There was an error submitting the score:', error);
-        });
+        if (score===0) { 
+            return console.log(`Score was "0", not uploading ${username}'s score`); } 
+        //Only sends score if score is greater than 0
+        if (score > 0) { 
+            axios.post('http://localhost:4000/api/scores', {
+              username: username,
+              score: score
+            })
+            .then(response => {
+              console.log('Score submitted successfully:', response.data);
+            })
+            .catch(error => {
+              console.error('There was an error submitting the score:', error);
+            });
+          }
     };
 
-    useEffect(() => {
+    useEffect(() => {//Computer's turn
         if (!isPlayerTurn && !calculateWinner(board)) {
             setStatus('Computer is thinking...');
-            const emptySquares = board.map((value, index) => value === null ? index : null).filter(val => val !== null);
+            const emptySquares = board.map((value, index) => value === null ? index : null).filter(val => val !== null);//Finds empty squares
             const randomMove = emptySquares[Math.floor(Math.random() * emptySquares.length)];
             if (randomMove !== undefined) {
-                setTimeout(() => {
+                setTimeout(() => {//Delays computer move
                     const newBoard = board.slice();
                     newBoard[randomMove] = 'O';
                     setBoard(newBoard);
