@@ -8,9 +8,8 @@ Future Soundtrack coming that will be composed in Tone.js
 ## Upcoming features
 - Will have a second status menu indicating who won the previous game
 - Will have local/non-local highscore divisions
-
-
-
+- More sound/visual feedback once player wins or loses a game
+- More visual skins
 
 
 Github Links:
