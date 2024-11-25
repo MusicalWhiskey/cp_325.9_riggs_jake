@@ -16,7 +16,7 @@ export default function LoginForm() {
     <div>
       <form className="login-form" onSubmit={handleSubmit}>
         <label className="login-label">
-          Username:
+          Set Your Username:
           <input
             type="text"
             value={username}
