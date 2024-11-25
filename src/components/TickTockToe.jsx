@@ -103,13 +103,13 @@ const TickTockToe = () => {
 
     const handleClick = (index) => {
         if (board[index] || calculateWinner(board) || timer === 0) {
-            return;
+            return;//Prevents player from making invalid moves
         }
 
         const newBoard = board.slice();
-        newBoard[index] = 'X';
+        newBoard[index] = 'X'; //Updates board
         setBoard(newBoard);
-        setIsPlayerTurn(false);
+        setIsPlayerTurn(false);//Computer's turn
     };
 
     useEffect(() => {
