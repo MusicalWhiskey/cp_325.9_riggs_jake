@@ -115,7 +115,7 @@ const TickTockToe = () => {
     useEffect(() => {
         const winner = calculateWinner(board);
         if (winner) {
-            setStatus(winner === 'X' ? 'You win!' : 'Computer score!');
+            setStatus(winner === 'X' ? 'You Scored!' : 'Computer Scored :(');
             if (winner === 'X') {
                 setScore((prev) => prev + 1);
             }
