@@ -28,7 +28,7 @@ export default function LoginForm() {
       </form>
       {displayName && <div className="welcome-message">Welcome, {displayName}!
       <Link to="/game"><button className="play-button">Click Here to Play</button>
-      </Link></div>}
+      </Link><p className="timer-message">Timer Will Start Automatically</p></div>}
     </div>
   );
 }
