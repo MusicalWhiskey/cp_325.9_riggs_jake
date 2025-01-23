@@ -84,22 +84,67 @@ const TickTockToe = () => {
           }
     };
 
+    // useEffect(() => {//Computer's turn
+    //     if (!isPlayerTurn && !calculateWinner(board)) {
+    //         setStatus('Computer is thinking...');
+    //         const emptySquares = board.map((value, index) => value === null ? index : null).filter(val => val !== null);//Finds empty squares
+    //         const randomMove = emptySquares[Math.floor(Math.random() * emptySquares.length)];
+    //         if (randomMove !== undefined) {
+    //             setTimeout(() => {//Delays computer move
+    //                 const newBoard = board.slice();
+    //                 newBoard[randomMove] = 'O';
+    //                 setBoard(newBoard);
+    //                 setIsPlayerTurn(true);
+    //                 setStatus(`Your move, ${username}!`);
+    //             }, 100);
+    //         }
+    //     }
+    // }, [isPlayerTurn, board]);
+
     useEffect(() => {//Computer's turn
         if (!isPlayerTurn && !calculateWinner(board)) {
             setStatus('Computer is thinking...');
             const emptySquares = board.map((value, index) => value === null ? index : null).filter(val => val !== null);//Finds empty squares
-            const randomMove = emptySquares[Math.floor(Math.random() * emptySquares.length)];
-            if (randomMove !== undefined) {
-                setTimeout(() => {//Delays computer move
-                    const newBoard = board.slice();
-                    newBoard[randomMove] = 'O';
-                    setBoard(newBoard);
-                    setIsPlayerTurn(true);
-                    setStatus(`Your move, ${username}!`);
-                }, 100);
+            const winningLines = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6],
+            ];
+    
+            // Check if player is one move away from winning
+            const playerWinningLines = winningLines.filter(line => {
+                const [a, b, c] = line;
+                return board[a] === 'X' && board[b] === 'X' && board[c] === null;
+            });
+    
+            if (playerWinningLines.length > 0) {
+                // Block player's potential winning line
+                const blockingMove = playerWinningLines[0].find(index => board[index] === null);
+                const newBoard = board.slice();
+                newBoard[blockingMove] = 'O';
+                setBoard(newBoard);
+                setIsPlayerTurn(true);
+                setStatus(`Your move, ${username}!`);
+            } else {
+                // Make a random move if no blocking opportunity
+                const randomMove = emptySquares[Math.floor(Math.random() * emptySquares.length)];
+                if (randomMove !== undefined) {
+                    setTimeout(() => {//Delays computer move
+                        const newBoard = board.slice();
+                        newBoard[randomMove] = 'O';
+                        setBoard(newBoard);
+                        setIsPlayerTurn(true);
+                        setStatus(`Your move, ${username}!`);
+                    }, 100);
+                }
             }
         }
-    }, [isPlayerTurn, board]);
+    }, [board, isPlayerTurn, username]);
 
     const handleClick = (index) => {
         if (board[index] || calculateWinner(board) || timer === 0) {

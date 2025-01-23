@@ -3,9 +3,11 @@ input {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    /* margin-top: 20px; */
+    margin-bottom: 6px;
     color: darkcyan;
+    background-color: black;
+    border-color: darkcyan;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 20px;
 }
@@ -31,8 +33,10 @@ input {
     filter: drop-shadow(0px 4px 4px darkcyan);
 }
 
-.login-form button {
-    padding: 10px 20px;
+#register-button {
+    padding: 4px;
+    margin-bottom: 20px;
+    margin-left: 150px;
     border: none;
     border-radius: 5px;
     background-color: black;
@@ -40,13 +44,38 @@ input {
     font-size: 16px;
     cursor: pointer;
     font-weight: bold;
-    margin-top: 30px;
+    margin-top: 4px;
     border: 1px solid darkcyan;
     filter: drop-shadow(0px 6px 6px darkcyan);
 
 }
 
-.login-form button:hover {
+#login-button {
+    padding: 4px;
+    margin-bottom: 20px;
+    margin-left: 170px;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    color: darkcyan;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 4px;
+    border: 1px solid darkcyan;
+    filter: drop-shadow(0px 6px 6px darkcyan);
+
+}
+
+#register-button:hover {
+    transform: scale(.95);
+    filter: drop-shadow(0px 3px 3px darkcyan);
+    transition: all 0.2s ease;
+
+
+}
+
+#login-button:hover {
     transform: scale(.95);
     filter: drop-shadow(0px 3px 3px darkcyan);
     transition: all 0.2s ease;
