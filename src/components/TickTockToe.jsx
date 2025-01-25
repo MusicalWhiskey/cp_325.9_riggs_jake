@@ -123,13 +123,15 @@ const TickTockToe = () => {
             });
     
             if (playerWinningLines.length > 0) {
+                setTimeout(() => { //Delays computer move
                 // Block player's potential winning line
                 const blockingMove = playerWinningLines[0].find(index => board[index] === null);
                 const newBoard = board.slice();
                 newBoard[blockingMove] = 'O';
                 setBoard(newBoard);
                 setIsPlayerTurn(true);
-                setStatus(`Your move, ${username}!`);
+                setStatus(`Your move, ${username}!`)
+                }, 100);
             } else {
                 // Make a random move if no blocking opportunity
                 const randomMove = emptySquares[Math.floor(Math.random() * emptySquares.length)];
