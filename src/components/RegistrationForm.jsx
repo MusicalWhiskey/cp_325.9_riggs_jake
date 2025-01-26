@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/UserForm.css'
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ visible, onCancel }) => {
     const [formData, setFormData] = useState({
         username: '',
         firstName: '',
@@ -12,6 +12,10 @@ const RegistrationForm = () => {
         password: '',
         confirmPassword: ''
     });
+
+    if (!visible) {
+        return null; // Don't render the form if it's not visible
+    }
 
     const handleChange = (e) => {
         setFormData({
@@ -40,7 +44,9 @@ const RegistrationForm = () => {
             <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
             <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
             <input type="password" name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} required />
+            <button id="cancel-button" type="button" onClick={onCancel}>Cancel</button>
             <button id="register-button" type="submit">Register</button>
+            
         </form>
     );
 };

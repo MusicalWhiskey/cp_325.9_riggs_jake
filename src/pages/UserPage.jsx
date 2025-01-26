@@ -1,16 +1,32 @@
-import React from "react";
-import RegistrationForm from "../components/RegistrationForm";
-import "../styles/Pages.css"
-import LoginForm from "../components/LoginForm";
+import React, { useState } from 'react';
+import RegistrationForm from '../components/RegistrationForm';
+import LoginForm from '../components/LoginForm';
+import '../styles/Pages.css'
 
+const UserPage = () => {
+    const [showRegistrationForm, setShowRegistrationForm] = useState(false);
 
+    const handleSignUpClick = () => {
+        setShowRegistrationForm(true);
+    };
 
-export default function UserPage() {
+    const handleCancelClick = () => {
+        setShowRegistrationForm(false);
+    };
+
     return (
         <main>
             <h1 className="title">TickTockToe</h1>
-            <RegistrationForm />
-            <LoginForm />
+            {showRegistrationForm ? (
+                <RegistrationForm visible={true} onCancel={handleCancelClick} />
+            ) : (
+                <>
+                    <button id="signup-button" type="button" onClick={handleSignUpClick}>Sign Up</button>
+                    <LoginForm />
+                </>
+            )}
         </main>
     );
-}
+};
+
+export default UserPage;

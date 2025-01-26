@@ -5,7 +5,8 @@ main {
     color: darkcyan;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width: 450px;
-    height: 750px;  
+    height: 750px;
+    margin: auto;
 
 }
 
@@ -41,4 +42,28 @@ main {
     font-size: 60px;
     filter: drop-shadow(0px 4px 10px darkcyan);
     margin-bottom: 10px;
+}
+
+#signup-button {
+    padding: 4px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    color: darkcyan;
+    font-size: 24px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 4px;
+    border: 1px solid darkcyan;
+    filter: drop-shadow(0px 6px 6px darkcyan);
+
+}
+
+#signup-button:hover {
+    transform: scale(.95);
+    filter: drop-shadow(0px 3px 3px darkcyan);
+    transition: all 0.2s ease;
+
+
 }
