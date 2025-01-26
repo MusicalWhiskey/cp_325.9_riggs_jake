@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/UserForm.css'
+import PropTypes from 'prop-types';
+
 
 const RegistrationForm = ({ visible, onCancel }) => {
     const [formData, setFormData] = useState({
@@ -49,6 +51,11 @@ const RegistrationForm = ({ visible, onCancel }) => {
             
         </form>
     );
+};
+
+RegistrationForm.propTypes = {
+    visible: PropTypes.bool.isRequired,
+    onCancel: PropTypes.func.isRequired,
 };
 
 export default RegistrationForm;
