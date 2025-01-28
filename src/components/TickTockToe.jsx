@@ -84,22 +84,6 @@ const TickTockToe = () => {
           }
     };
 
-    // useEffect(() => {//Computer's turn
-    //     if (!isPlayerTurn && !calculateWinner(board)) {
-    //         setStatus('Computer is thinking...');
-    //         const emptySquares = board.map((value, index) => value === null ? index : null).filter(val => val !== null);//Finds empty squares
-    //         const randomMove = emptySquares[Math.floor(Math.random() * emptySquares.length)];
-    //         if (randomMove !== undefined) {
-    //             setTimeout(() => {//Delays computer move
-    //                 const newBoard = board.slice();
-    //                 newBoard[randomMove] = 'O';
-    //                 setBoard(newBoard);
-    //                 setIsPlayerTurn(true);
-    //                 setStatus(`Your move, ${username}!`);
-    //             }, 100);
-    //         }
-    //     }
-    // }, [isPlayerTurn, board]);
 
     useEffect(() => {//Computer's turn
         if (!isPlayerTurn && !calculateWinner(board)) {
