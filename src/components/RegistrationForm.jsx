@@ -30,6 +30,9 @@ const RegistrationForm = ({ visible, onCancel }) => {
         e.preventDefault();
 
         try {
+            // Clear local storage before logging in
+            localStorage.clear();
+
             const response = await axios.post(`http://localhost:4000/api/register`, formData);
             console.log(`User registered successfully:`, response.data);
             // Store the username in local storage
