@@ -18,12 +18,15 @@ const LoginForm = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('/api/login', credentials);
+            const response = await axios.post('http://localhost:4000/api/login', credentials);
             console.log('User logged in successfully:', response.data);
+         // Store the username in local storage
+            localStorage.setItem('username', response.data.username);
         } catch (error) {
             console.error('Error logging in:', error);
         }
     };
+
 
     return (
         <form onSubmit={handleSubmit}>

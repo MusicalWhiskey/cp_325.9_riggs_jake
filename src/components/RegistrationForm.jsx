@@ -31,7 +31,9 @@ const RegistrationForm = ({ visible, onCancel }) => {
 
         try {
             const response = await axios.post(`http://localhost:4000/api/register`, formData);
-            console.log('User registered successfully:', response.data);
+            console.log(`User registered successfully:`, response.data);
+            // Store the username in local storage
+            localStorage.setItem('username', response.data.username);
         } catch (error) {
             console.error('Error registering user:', error);
         }
