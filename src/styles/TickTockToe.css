@@ -68,8 +68,9 @@ body {
 
 .reset-clock {
   position: absolute;
-  top: 660px;
-  left: 250px;
+  top: 680px;
+  justify-self: center;
+  margin-left: 95px;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
