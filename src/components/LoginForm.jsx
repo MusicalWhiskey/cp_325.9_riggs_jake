@@ -36,10 +36,10 @@ const LoginForm = ({ onLogin, onCancel }) => {
     <form onSubmit={handleSubmit}>
       <input type="text" name="identifier" placeholder="Username or Email" value={credentials.identifier} onChange={handleChange} required />
       <input type="password" name="password" placeholder="Password" value={credentials.password} onChange={handleChange} required />
-      <button id="login-button" type="submit">Login</button>
       {onCancel && (
         <button id="cancel-button" type="button" onClick={onCancel}>Cancel</button>
       )}
+      <button id="login-button" type="submit">Login</button>
     </form>
   );
 };

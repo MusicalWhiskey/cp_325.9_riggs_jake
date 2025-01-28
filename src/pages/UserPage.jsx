@@ -52,6 +52,7 @@ const UserPage = () => {
             ) : (
               <>
                 <button id="signup-button" type="button" onClick={handleSignUpClick}>Sign Up</button>
+                <p id="or-login">-Or Login- </p>
                 <LoginForm onLogin={handleLogin} />
               </>
             )
