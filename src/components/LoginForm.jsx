@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = ({ onLogin, onCancel }) => {
   const [credentials, setCredentials] = useState({
     identifier: '',
     password: ''
@@ -37,6 +37,9 @@ const LoginForm = ({ onLogin }) => {
       <input type="text" name="identifier" placeholder="Username or Email" value={credentials.identifier} onChange={handleChange} required />
       <input type="password" name="password" placeholder="Password" value={credentials.password} onChange={handleChange} required />
       <button id="login-button" type="submit">Login</button>
+      {onCancel && (
+        <button id="cancel-button" type="button" onClick={onCancel}>Cancel</button>
+      )}
     </form>
   );
 };
