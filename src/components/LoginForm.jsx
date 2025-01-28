@@ -29,6 +29,8 @@ const LoginForm = ({ onLogin, onCancel }) => {
       onLogin(username);
     } catch (error) {
       console.error('Error logging in:', error);
+      alert('Invalid username or password. Please try again.');
+
     }
   };
 
