@@ -47,15 +47,15 @@ const UserPage = () => {
           {showRegistrationForm ? (
             <RegistrationForm visible={true} onCancel={handleCancelClick} />
           ) : (
-            showLoginForm ? (
-              <LoginForm onLogin={handleLogin} onCancel={handleCancelNewLogin} />
-            ) : (
-              <>
-                <button id="signup-button" type="button" onClick={handleSignUpClick}>Sign Up</button>
-                <p id="or-login">-Or Login- </p>
+            <>
+              <button id="signup-button" type="button" onClick={handleSignUpClick}>Sign Up</button>
+              <p id="or-login">-Or Login-</p>
+              {showLoginForm ? (
+                <LoginForm onLogin={handleLogin} onCancel={handleCancelNewLogin} />
+              ) : (
                 <LoginForm onLogin={handleLogin} />
-              </>
-            )
+              )}
+            </>
           )}
         </>
       )}
