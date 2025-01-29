@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import '../styles/TickTockToe.css';
 import axios from 'axios';
+import LoginName from './LoginName';
 
-
+const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+const username = localStorage.getItem('username');
 //Makes the game board
 const initialBoard = Array(9).fill(null);
 
@@ -166,6 +168,8 @@ const TickTockToe = () => {
     }, [board]);
 
     return (
+        <main>
+            {isLoggedIn && <LoginName username={username} />}
         <div className="board-container">
             <div className="game-info">
                 <span className='timer'>{timer} Seconds Remaining</span><span className='score'>Score: {score}</span>
@@ -193,6 +197,7 @@ const TickTockToe = () => {
                 10 Second Game
             </button>
         </div>
+        </main>
     );
 };
 
