@@ -10,7 +10,7 @@ export default function Scores() {
     const fetchScores = async () => 
         {
             try {
-                const response = await axios.get("http://localhost:4000/scores");
+                const response = await axios.get("http://localhost:8080/scores");
                 const sortedScores = response.data.sort((a, b) => b.score - a.score);
                 setAllScores(sortedScores);
                 setAllScores(response.data);

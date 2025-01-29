@@ -21,7 +21,7 @@ const LoginForm = ({ onLogin, onCancel }) => {
       // Clear local storage before logging in
       localStorage.clear();
 
-      const response = await axios.post('http://localhost:4000/api/login', credentials);
+      const response = await axios.post('http://localhost:8080/api/login', credentials);
       console.log('User logged in successfully:', response.data);
       // Store the username in local storage
       const username = response.data.username;

@@ -73,7 +73,7 @@ const TickTockToe = () => {
             return console.log(`Score was "0", not uploading ${username}'s score`); } 
         //Only sends score if score is greater than 0
         if (score > 0) { 
-            axios.post('http://localhost:4000/api/scores', {
+            axios.post('http://localhost:8080/api/scores', {
               username: username,
               score: score
             })
