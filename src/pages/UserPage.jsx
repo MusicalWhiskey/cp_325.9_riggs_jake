@@ -3,7 +3,6 @@ import RegistrationForm from '../components/RegistrationForm';
 import LoginForm from '../components/LoginForm';
 import WelcomeScreen from '../components/WelcomeScreen';
 import '../styles/Pages.css'
-import LoginName from '../components/LoginName';
 
 
 
@@ -26,8 +25,6 @@ const UserPage = () => {
     setIsLoggedIn(true);
     setUsername(username);
     setShowLoginForm(false);
-    localStorage.setItem('username', username);
-    localStorage.setItem('isLoggedIn', true);
   };
 
   const handleChangeUser = () => {
@@ -42,7 +39,6 @@ const UserPage = () => {
 
   return (
     <main>
-        {isLoggedIn && <LoginName username={username} />}
       <h1 className="title">TickTockToe</h1>
       {isLoggedIn && !showLoginForm ? (
         <>
