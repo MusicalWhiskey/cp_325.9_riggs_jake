@@ -3,7 +3,7 @@ import RegistrationForm from '../components/RegistrationForm';
 import LoginForm from '../components/LoginForm';
 import WelcomeScreen from '../components/WelcomeScreen';
 import '../styles/Pages.css'
-
+import LoginName from '../components/LoginName';
 const UserPage = () => {
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,6 +36,7 @@ const UserPage = () => {
 
   return (
     <main>
+        <LoginName username={username} />
       <h1 className="title">TickTockToe</h1>
       {isLoggedIn && !showLoginForm ? (
         <>

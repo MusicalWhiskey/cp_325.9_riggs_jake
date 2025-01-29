@@ -1,4 +1,4 @@
-import react from 'react'
+import react, { useState } from 'react'
 
 import { Routes, Route } from 'react-router-dom'
 
@@ -12,17 +12,16 @@ import NavBar from './components/NavBar.jsx'
 import './App.css'
 
 export default function App() {
+  const username = localStorage.getItem('username');
   return (
     <main className="app-container">
-      <NavBar />
+      <NavBar username={username} />
             <Routes>
                 <Route path="/" element={<UserPage />} />
                 <Route path="/game" element={<GamePage />} />
                 <Route path="/scores" element={<ScoresPage />} />
                 <Route path="/donate" element={<DonatePage />} />
-
                 <Route path="*" element={<NotFoundPage />} />
-                
             </Routes>
 
     </main>
