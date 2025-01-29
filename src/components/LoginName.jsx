@@ -1,4 +1,3 @@
-import React from 'react';
 import '../styles/LoginName.css';
 export default function LoginName({ username }) {
   return (

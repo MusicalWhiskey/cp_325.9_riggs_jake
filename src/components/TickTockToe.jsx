@@ -4,7 +4,6 @@ import axios from 'axios';
 import LoginName from './LoginName';
 
 const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-const username = localStorage.getItem('username');
 //Makes the game board
 const initialBoard = Array(9).fill(null);
 

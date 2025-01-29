@@ -1,5 +1,5 @@
-import React from 'react';
 
+// eslint-disable-next-line react/prop-types
 const WelcomeScreen = ({ username }) => {
   console.log('WelcomeScreen rendered');
   return (
@@ -8,5 +8,6 @@ const WelcomeScreen = ({ username }) => {
     </div>
   );
 };
+
 
 export default WelcomeScreen;
