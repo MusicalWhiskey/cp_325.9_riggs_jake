@@ -4,7 +4,11 @@ import LoginForm from '../components/LoginForm';
 import WelcomeScreen from '../components/WelcomeScreen';
 import '../styles/Pages.css'
 import LoginName from '../components/LoginName';
+
+
+
 const UserPage = () => {
+
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
@@ -22,6 +26,8 @@ const UserPage = () => {
     setIsLoggedIn(true);
     setUsername(username);
     setShowLoginForm(false);
+    localStorage.setItem('username', username);
+    localStorage.setItem('isLoggedIn', true);
   };
 
   const handleChangeUser = () => {
@@ -36,7 +42,7 @@ const UserPage = () => {
 
   return (
     <main>
-        <LoginName username={username} />
+        {isLoggedIn && <LoginName username={username} />}
       <h1 className="title">TickTockToe</h1>
       {isLoggedIn && !showLoginForm ? (
         <>

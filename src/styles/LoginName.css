@@ -3,8 +3,7 @@
     color: black;
     font-size: 12px;
     margin-left: 346px;
-    filter: drop-shadow(0px 0px 8px cyan);    
-
-
+    filter: drop-shadow(0px 0px 8px cyan); 
+    text-shadow: 0px 0px 3px cyan;
 
 }
