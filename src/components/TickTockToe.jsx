@@ -38,10 +38,12 @@ const TickTockToe = () => {
     const [score, setScore] = useState(0); //Player score
     const intervalRef = useRef(null); //Game timer handler/setter
     const requestSentRef = useRef(false); //Score submission tracker
+    const [gameStarted, setGameStarted] = useState(false);
 
 
     //Game timer handler
     useEffect(() => {
+    if (gameStarted) {
         if (intervalRef.current) {
             clearInterval(intervalRef.current);//Clears interval
         }
@@ -64,7 +66,9 @@ const TickTockToe = () => {
         }, 1000); //Runs every 1 second
 
         return () => clearInterval(intervalRef.current);
-    }, [score]);
+    }
+    }, [gameStarted, score]);
+
 
 
     const sendScore = () => {
@@ -142,6 +146,9 @@ const TickTockToe = () => {
         newBoard[index] = 'X'; //Updates board
         setBoard(newBoard);
         setIsPlayerTurn(false);//Computer's turn
+        setGameStarted(true);
+        console.log('Timer started!'); // Start the game
+
     };
 
     useEffect(() => {
@@ -168,7 +175,7 @@ const TickTockToe = () => {
 
     return (
         <main>
-            {isLoggedIn && <LoginName username={username} />}
+            {/* {isLoggedIn && <LoginName username={username} />} */}
         <div className="board-container">
             <div className="game-info">
                 <span className='timer'>{timer} Seconds Remaining</span><span className='score'>Score: {score}</span>
