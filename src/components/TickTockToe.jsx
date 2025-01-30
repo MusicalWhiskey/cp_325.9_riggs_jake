@@ -34,7 +34,7 @@ const TickTockToe = () => {
     const [board, setBoard] = useState(initialBoard); //Game board setter
     const [isPlayerTurn, setIsPlayerTurn] = useState(true); //Turn tracker
     const [status, setStatus] = useState(`${username}, quickly make your move!`); //Status message
-    const [timer, setTimer] = useState(60); //Game timer limit
+    const [timer, setTimer] = useState(10); //Game timer limit
     const [score, setScore] = useState(0); //Player score
     const intervalRef = useRef(null); //Game timer handler/setter
     const requestSentRef = useRef(false); //Score submission tracker
@@ -43,32 +43,32 @@ const TickTockToe = () => {
 
     //Game timer handler
     useEffect(() => {
-    if (gameStarted) {
-        if (intervalRef.current) {
-            clearInterval(intervalRef.current);//Clears interval
-        }
-
-        intervalRef.current = setInterval(() => {
-            setTimer((prev) => {
-                if (prev === 0) {
-                    clearInterval(intervalRef.current);
-                    intervalRef.current = null;//Clears interval if timer runs out
-                    if (!requestSentRef.current) {
-                        sendScore(); //Sends score
-                        requestSentRef.current = true;
+        if (gameStarted) {
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);//Clears interval
+            }
+    
+            intervalRef.current = setInterval(() => {
+                setTimer((prev) => {
+                    if (prev === 0) {
+                        clearInterval(intervalRef.current);
+                        intervalRef.current = null;//Clears interval if timer runs out
+                        if (!requestSentRef.current) {
+                            sendScore(); //Sends score
+                            requestSentRef.current = true;
+                        }
+                        setStatus(`Time's up, ${username}... \n You've scored ${score} points! \n Make another move \n to start again.`);
+                        setGameStarted(false);
+                        console.log('gameStarted reset!'); // Reset gameStarted state to false
+                        return prev;
                     }
-                    setStatus(`Time's up, ${username}... \n You've scored ${score} points!
-                         `);
-                    return prev;
-                }
-                return prev - 1;
-            });
-        }, 1000); //Runs every 1 second
-
-        return () => clearInterval(intervalRef.current);
-    }
+                    return prev - 1;
+                });
+            }, 1000); //Runs every 1 second
+    
+            return () => clearInterval(intervalRef.current);
+        }
     }, [gameStarted, score]);
-
 
 
     const sendScore = () => {
@@ -139,16 +139,28 @@ const TickTockToe = () => {
 
     const handleClick = (index) => {
         if (board[index] || calculateWinner(board) || timer === 0) {
-            return;//Prevents player from making invalid moves
+            if (!gameStarted) {
+                resetGameState();
+            } else {
+                return; // Prevents player from making invalid moves
+            }
         }
-
+    
         const newBoard = board.slice();
-        newBoard[index] = 'X'; //Updates board
+        newBoard[index] = 'X'; // Updates board
         setBoard(newBoard);
-        setIsPlayerTurn(false);//Computer's turn
+        setIsPlayerTurn(false); // Computer's turn
         setGameStarted(true);
         console.log('Timer started!'); // Start the game
-
+    };
+    
+    const resetGameState = () => {
+        setBoard(initialBoard);
+        setIsPlayerTurn(true);
+        setStatus(`${username}, quickly make your move!`);
+        setTimer(10);
+        setScore(0);
+        setGameStarted(true);
     };
 
     
@@ -218,7 +230,7 @@ const TickTockToe = () => {
             <div className="status" style={{ whiteSpace: 'pre-wrap' }}>
             {status}
             </div>
-            <button className="reset-clock" onClick={() => {
+            {/* <button className="reset-clock" onClick={() => {
                 setBoard(initialBoard);
                 setStatus(`${username}, quickly make your move!`);
                 setIsPlayerTurn(true);
@@ -227,7 +239,7 @@ const TickTockToe = () => {
                 requestSentRef.current = false;
             }}>
                 10 Second Game
-            </button>
+            </button> */}
         </div>
         </main>
     );
