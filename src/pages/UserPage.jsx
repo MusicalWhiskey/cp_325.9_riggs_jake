@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+// UserPage.js
+import { useState, useEffect } from 'react';
 import RegistrationForm from '../components/RegistrationForm';
 import LoginForm from '../components/LoginForm';
 import WelcomeScreen from '../components/WelcomeScreen';
 import '../styles/Pages.css'
 
-
-
 const UserPage = () => {
-
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [showLoginForm, setShowLoginForm] = useState(false);
+
+  useEffect(() => {
+    const storedIsLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const storedUsername = localStorage.getItem('username');
+    console.log('storedIsLoggedIn:', storedIsLoggedIn);
+
+    if (storedIsLoggedIn) {
+      setIsLoggedIn(true);
+      setUsername(storedUsername);
+      setShowLoginForm(false);
+    }
+  }, []);
 
   const handleSignUpClick = () => {
     setShowRegistrationForm(true);
@@ -25,7 +35,8 @@ const UserPage = () => {
     setIsLoggedIn(true);
     setUsername(username);
     setShowLoginForm(false);
-  };
+    console.log('localStorage:', localStorage);
+    localStorage.setItem('isLoggedIn', 'true');  };
 
   const handleChangeUser = () => {
     setIsLoggedIn(false);
@@ -40,7 +51,7 @@ const UserPage = () => {
   return (
     <main>
       <h1 className="title">TickTockToe</h1>
-      {isLoggedIn && !showLoginForm ? (
+      {isLoggedIn ? (
         <>
           <WelcomeScreen username={username} />
           <button id="change-user-button" type="button" onClick={handleChangeUser}>Change User</button>
@@ -56,7 +67,7 @@ const UserPage = () => {
               {showLoginForm ? (
                 <LoginForm onLogin={handleLogin} onCancel={handleCancelNewLogin} />
               ) : (
-                <LoginForm onLogin={handleLogin} />
+                <button id="login-button" type="button" onClick={() => setShowLoginForm(true)}>Login</button>
               )}
             </>
           )}
