@@ -29,14 +29,22 @@ const RegistrationForm = ({ visible, onCancel }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (formData.password !== formData.confirmPassword) {
+            alert('Passwords do not match. Please try again.');
+            return;
+        }
+
         try {
             // Clear local storage before logging in
             localStorage.clear();
 
             const response = await axios.post(`http://localhost:8080/api/register`, formData);
             console.log(`User registered successfully:`, response.data);
+            console.log(localStorage);
             // Store the username in local storage
             localStorage.setItem('username', response.data.username);
+            localStorage.setItem('isLoggedIn', 'true');
+            onCancel();
         } catch (error) {
             console.error('Error registering user:', error);
         }
@@ -52,7 +60,7 @@ const RegistrationForm = ({ visible, onCancel }) => {
             <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
             <input type="password" name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} required />
             <button id="cancel-register-button" type="button" onClick={onCancel}>Cancel</button>
-            <button id="register-button" type="submit">Register</button>
+            <button id="register-button" type="submit" onClick={handleSubmit}>Register</button>
             
         </form>
     );
