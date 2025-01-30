@@ -151,6 +151,8 @@ const TickTockToe = () => {
 
     };
 
+    
+
     useEffect(() => {
         const winner = calculateWinner(board);
         if (winner) {
@@ -172,6 +174,30 @@ const TickTockToe = () => {
             }, 100);
         }
     }, [board]);
+
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            const numpadMap = {
+                '7': 0,
+                '8': 1,
+                '9': 2,
+                '4': 3,
+                '5': 4,
+                '6': 5,
+                '1': 6,
+                '2': 7,
+                '3': 8
+            }
+            const index = numpadMap[event.key];
+          if (index !== undefined) {
+            handleClick(index);
+          }
+        };
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+          document.removeEventListener('keydown', handleKeyDown);
+        };
+      }, [handleClick]);
 
     return (
         <main>
