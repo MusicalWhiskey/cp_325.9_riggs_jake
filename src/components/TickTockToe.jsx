@@ -39,15 +39,14 @@ const TickTockToe = () => {
     const intervalRef = useRef(null); //Game timer handler/setter
     const requestSentRef = useRef(false); //Score submission tracker
     const [gameStarted, setGameStarted] = useState(false);
+    const [isTimerRunning, setIsTimerRunning] = useState(false);
+
 
 
     //Game timer handler
     useEffect(() => {
-        if (gameStarted) {
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current);//Clears interval
-            }
-    
+        if (gameStarted && !isTimerRunning) {
+            setIsTimerRunning(true);
             intervalRef.current = setInterval(() => {
                 setTimer((prev) => {
                     if (prev === 0) {
@@ -57,18 +56,17 @@ const TickTockToe = () => {
                             sendScore(); //Sends score
                             requestSentRef.current = true;
                         }
-                        setStatus(`Time's up, ${username}... \n You've scored ${score} points! \n Make another move \n to start again.`);
-                        setGameStarted(false);
-                        console.log('gameStarted reset!'); // Reset gameStarted state to false
+                        setStatus(`Time's up, ${username}... \n You've scored ${score} points! \n To start again, \n make a new move.
+                             `);
+                        setGameStarted(false); // Reset gameStarted state to false
+                        setIsTimerRunning(false); // Reset isTimerRunning state to false
                         return prev;
                     }
                     return prev - 1;
                 });
             }, 1000); //Runs every 1 second
-    
-            return () => clearInterval(intervalRef.current);
         }
-    }, [gameStarted, score]);
+    }, [gameStarted, isTimerRunning, score]);
 
 
     const sendScore = () => {
